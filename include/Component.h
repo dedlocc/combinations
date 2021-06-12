@@ -1,6 +1,7 @@
 #pragma once
 
-#include <ctime>
+#include "Date.h"
+
 #include <istream>
 #include <string>
 
@@ -22,5 +23,5 @@ struct Component
     InstrumentType type{InstrumentType::Unknown};
     double ratio{0};
     double strike{0};
-    std::tm expiration;
+    Expiration expiration;
 };
