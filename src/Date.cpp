@@ -1,7 +1,7 @@
 #include "Date.h"
 
 namespace {
-void addMonth(const std::size_t amount, std::size_t & month, std::size_t & year)
+void addMonth(const int amount, int & month, int & year)
 {
     month += amount;
     if (month >= 12) {
@@ -33,24 +33,22 @@ bool Expiration::match(Duration dur, const Expiration & target)
         addMonth(3, temp.month, temp.year);
         return target <= temp;
     case Period::Year:
-        year += dur.amount;
+        temp.year += dur.amount;
         break;
     case Period::Month:
-        addMonth(dur.amount, temp.month, temp.year);
+        temp.month += dur.amount;
         break;
     case Period::Day:
-        std::tm tm;
-        tm.tm_year = year;
-        tm.tm_mon = month;
-        tm.tm_mday = day + dur.amount;
-        std::mktime(&tm);
-        year = tm.tm_year;
-        month = tm.tm_mon;
-        day = tm.tm_mday;
+        temp.day += dur.amount;
         break;
     }
 
-    return temp == target;
+    std::tm tm{};
+    tm.tm_year = temp.year;
+    tm.tm_mon = temp.month;
+    tm.tm_mday = temp.day;
+    std::mktime(&tm);
+    return tm == target;
 }
 
 bool operator==(const Expiration & d1, const Expiration & d2)

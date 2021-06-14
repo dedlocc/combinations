@@ -34,5 +34,5 @@ public:
     friend bool operator>=(const Expiration & d1, const Expiration & d2);
 
 private:
-    std::size_t year, month, day;
+    int year, month, day;
 };

@@ -88,7 +88,7 @@ protected:
             double lastStrike = 0;
             int lastStrikeOffset = 0;
             std::unordered_map<char, Expiration> exps;
-            Expiration lastExp{};
+            Expiration lastExp;
             int lastExpOffset = 0;
 
             for (std::size_t j = 0; j < legs.size(); ++j) {
@@ -116,9 +116,8 @@ protected:
                     if (!lastExp.match(*dur, comp.expiration)) {
                         return false;
                     }
-                    continue;
                 }
-                if (!matchOffset(exps, lastExp, lastExpOffset, leg.expiration, comp.expiration)) {
+                else if (!matchOffset(exps, lastExp, lastExpOffset, leg.expiration, comp.expiration)) {
                     return false;
                 }
             }
