@@ -1,7 +1,6 @@
 #include "Component.h"
 
 #include <iomanip>
-#include <sstream>
 
 Component Component::from_stream(std::istream & strm)
 {
@@ -40,10 +39,13 @@ Component Component::from_stream(std::istream & strm)
         }
     }
 
-    strm >> std::get_time(&component.expiration, "%Y-%m-%d");
+    std::tm tm;
+    strm >> std::get_time(&tm, "%Y-%m-%d");
     if (strm.fail()) {
         return {};
     }
+
+    component.expiration = tm;
 
     return component;
 }

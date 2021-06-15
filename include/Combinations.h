@@ -1,20 +1,21 @@
 #pragma once
 
-#include <filesystem>
-#include <string>
-#include <vector>
+#include "Component.h"
 
-struct Component;
+#include <filesystem>
+#include <vector>
 
 class Combinations
 {
 public:
-    Combinations() = default;
+    Combinations();
+    ~Combinations();
 
     bool load(const std::filesystem::path & resource);
 
     std::string classify(const std::vector<Component> & components, std::vector<int> & order) const;
 
 private:
-    // implementation details
+    struct Impl;
+    const std::unique_ptr<Impl> impl;
 };

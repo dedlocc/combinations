@@ -1,7 +1,6 @@
 #include "Combinations.h"
 #include "Component.h"
 
-#include <iomanip>
 #include <iostream>
 #include <string>
 
@@ -33,7 +32,7 @@ int main(int argc, char * argv[])
     std::size_t num;
     std::cin >> num;
     if (std::cin.fail()) {
-        return fail("Unvalid number of legs");
+        return fail("Invalid number of legs");
     }
 
     std::vector<Component> components;
